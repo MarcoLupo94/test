@@ -4,6 +4,8 @@ import {
     Column,
     ManyToOne,
     JoinColumn,
+    BeforeInsert,
+    BeforeUpdate,
 } from 'typeorm'
 import { Product } from './Product'
 import { Customer } from './Customer'
@@ -26,4 +28,12 @@ export class Review {
     @ManyToOne(() => Customer)
     @JoinColumn()
     customer: Customer
+
+    @BeforeInsert()
+    @BeforeUpdate()
+    validateRating() {
+        if (this.rating < 1 || this.rating > 5) {
+            throw new Error('Rating must be between 1 and 5')
+        }
+    }
 }
