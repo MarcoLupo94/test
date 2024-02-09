@@ -1,4 +1,6 @@
-import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm'
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from 'typeorm'
+import { Product } from './Product'
+import { Customer } from './Customer'
 
 @Entity()
 export class Review {
@@ -10,4 +12,10 @@ export class Review {
 
     @Column({ type: 'int' })
     rating: number
+
+    @ManyToOne(() => Product, (product) => product.reviews)
+    product: Product
+
+    @ManyToOne(() => Customer, (customer) => customer.reviews)
+    customer: Customer
 }
