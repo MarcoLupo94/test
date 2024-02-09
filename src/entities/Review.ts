@@ -20,10 +20,10 @@ export class Review {
     rating: number
 
     @ManyToOne(() => Product)
-    @JoinColumn({ name: 'productId' })
+    @JoinColumn()
     product: Product
 
     @ManyToOne(() => Customer)
-    @JoinColumn({ name: 'customerId' })
+    @JoinColumn()
     customer: Customer
 }
