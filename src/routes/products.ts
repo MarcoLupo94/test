@@ -18,7 +18,11 @@ router.get("/products", async (req, res) => {
 router.post("/purchaseProduct/:productId", async (req, res) => {
     try {
         const product = await AppDataSource.manager.findOne(Product, { where: { id: parseInt(req.params.productId) } });
-        if (product) {
+
+        if(product.stock <= 0) return res.status(404).json({ error: "Product out of stock" });
+
+         if (product) {
+            product.stock = product.stock - 1;
             await AppDataSource.manager.save(product);
             res.json(product);
         } else {
