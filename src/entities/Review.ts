@@ -1,4 +1,10 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from 'typeorm'
+import {
+    Entity,
+    PrimaryGeneratedColumn,
+    Column,
+    ManyToOne,
+    JoinColumn,
+} from 'typeorm'
 import { Product } from './Product'
 import { Customer } from './Customer'
 
@@ -8,14 +14,16 @@ export class Review {
     id: number
 
     @Column({ type: 'text' })
-    content: string
+    review: string
 
     @Column({ type: 'int' })
     rating: number
 
-    @ManyToOne(() => Product, (product) => product.reviews)
+    @ManyToOne(() => Product)
+    @JoinColumn({ name: 'productId' })
     product: Product
 
-    @ManyToOne(() => Customer, (customer) => customer.reviews)
+    @ManyToOne(() => Customer)
+    @JoinColumn({ name: 'customerId' })
     customer: Customer
 }

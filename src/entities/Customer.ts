@@ -14,7 +14,4 @@ export class Customer {
 
     @Column({ type: 'text' })
     address: string
-
-    @OneToMany(() => Review, (review) => review.product)
-    reviews: Review[]
 }

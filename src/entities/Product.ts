@@ -17,7 +17,4 @@ export class Product {
 
     @Column({ type: 'text' })
     size: string
-
-    @OneToMany(() => Review, (review) => review.product)
-    reviews: Review[]
 }
